@@ -1,139 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Weisheit Concrete Pros</title>
-<style>
-  /* Reset */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background: #f5f7fa;
-    color: #333;
-  }
-  header {
-    background: #002855; /* Navy Blue */
-    color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 2.8rem;
-    letter-spacing: 2px;
-  }
-  header p {
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-top: 0.3rem;
-  }
-  main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-  section {
-    margin-bottom: 3rem;
-  }
-  section h2 {
-    border-bottom: 3px solid #7a7a7a; /* Gray */
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-    color: #002855;
-  }
-  /* Services List */
-  ul.services-list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap: 1rem;
-  }
-  ul.services-list li {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-    font-weight: 600;
-    color: #002855;
-  }
-  /* Gallery */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    gap: 1rem;
-  }
-  .gallery img {
-    width: 100%;
-    border-radius: 6px;
-    object-fit: cover;
-    aspect-ratio: 4 / 3;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-  }
-  footer {
-    background: #555;
-    color: white;
-    text-align: center;
-    padding: 1rem 1rem;
-    font-size: 0.9rem;
-  }
-  @media (max-width: 600px) {
-    header h1 {
-      font-size: 2rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weisheit Concrete Pros</title>
+  <style>
+    :root {
+      --primary: #1e2a38; /* Navy */
+      --secondary: #6c757d; /* Gray */
+      --accent: #d1a766; /* Subtle warm accent */
     }
-  }
-</style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1400x600?text=Concrete+Work') center/cover no-repeat;
+      color: white;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--primary);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .service {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .service h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cta {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin-bottom: 1rem;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #222;
+      color: #ccc;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <!-- Placeholder logo -->
-  <img src="https://via.placeholder.com/150x60?text=Logo" alt="Weisheit Concrete Pros Logo" style="margin-bottom: 1rem;" />
-  <h1>Weisheit Concrete Pros</h1>
-  <p>Big or Small, We Pour it All</p>
-</header>
+  <header>
+    <h1>Weisheit Concrete Pros</h1>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<main>
-  <section id="about">
-    <h2>About Us</h2>
-    <p>At Weisheit Concrete Pros, we provide high-quality concrete services for both commercial and residential applications. Our team is dedicated to delivering durable, beautiful concrete solutions tailored to your needs.</p>
-  </section>
+  <div class="hero">
+    <h2>Big or Small, We Pour It All</h2>
+    <p>Residential & Commercial Concrete Services in North Texas</p>
+  </div>
 
   <section id="services">
-    <h2>Our Services</h2>
-    <ul class="services-list">
-      <li>Driveways</li>
-      <li>Slabs</li>
-      <li>Patios</li>
-      <li>Walkways</li>
-      <li>Stamp and Dye</li>
-      <li>Bobcat Work</li>
-      <li><em>Commercial & Residential</em></li>
-    </ul>
+    <h2 class="section-title">Our Services</h2>
+    <div class="services">
+      <div class="service">
+        <h3>Driveways</h3>
+        <p>Durable, smooth concrete driveways built to last.</p>
+      </div>
+      <div class="service">
+        <h3>Patios</h3>
+        <p>Custom patios to enhance your outdoor living space.</p>
+      </div>
+      <div class="service">
+        <h3>Slabs</h3>
+        <p>Strong foundations for homes, garages, and sheds.</p>
+      </div>
+      <div class="service">
+        <h3>Walkways</h3>
+        <p>Safe and stylish walkways for your property.</p>
+      </div>
+      <div class="service">
+        <h3>Stamp & Dye</h3>
+        <p>Decorative concrete solutions with personality.</p>
+      </div>
+      <div class="service">
+        <h3>Bobcat Work</h3>
+        <p>Excavation, grading, and prep done with precision.</p>
+      </div>
+    </div>
   </section>
 
   <section id="gallery">
-    <h2>Gallery</h2>
+    <h2 class="section-title">Gallery</h2>
     <div class="gallery">
-      <img src="https://via.placeholder.com/400x300?text=Concrete+Project+1" alt="Concrete Project 1" />
-      <img src="https://via.placeholder.com/400x300?text=Concrete+Project+2" alt="Concrete Project 2" />
-      <img src="https://via.placeholder.com/400x300?text=Concrete+Project+3" alt="Concrete Project 3" />
-      <img src="https://via.placeholder.com/400x300?text=Concrete+Project+4" alt="Concrete Project 4" />
+      <img src="https://via.placeholder.com/400x300?text=Job+1" alt="Gallery 1">
+      <img src="https://via.placeholder.com/400x300?text=Job+2" alt="Gallery 2">
+      <img src="https://via.placeholder.com/400x300?text=Job+3" alt="Gallery 3">
     </div>
   </section>
-</main>
 
-<footer>
-  <p>© 2025 Weisheit Concrete Pros. All rights reserved.</p>
-  <p>Contact us: info@weisheitconcretepros.com | (555) 123-4567</p>
-  <p>Fort Worth, TX</p>
-</footer>
+  <section class="cta" id="contact">
+    <h2>Let’s Talk About Your Concrete Project</h2>
+    <p>We proudly serve all of North Texas. Reach out today for a quote!</p>
+    <a href="mailto:your@email.com">Contact Us</a>
+  </section>
+
+  <footer>
+    &copy; 2025 Weisheit Concrete Pros | All rights reserved
+  </footer>
 
 </body>
 </html>

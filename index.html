@@ -3,12 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Weisheit Concrete Pros</title>
+  <title>Greg Weisheit Concrete Co - Professional Concrete Services in North Texas</title>
+  <meta name="description" content="Family-owned concrete company with 60+ years of experience. Driveways, patios, slabs, walkways, decorative concrete & bobcat work in North Texas.">
   <style>
     :root {
-      --primary: #1e2a38; /* Navy */
-      --secondary: #6c757d; /* Gray */
-      --accent: #d1a766; /* Subtle warm accent */
+      --primary: #1e2a38;
+      --primary-light: #2c3e50;
+      --secondary: #6c757d;
+      --accent: #d1a766;
+      --accent-dark: #b58943;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --dark-gray: #343a40;
+      --shadow: 0 10px 30px rgba(0,0,0,0.1);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -19,209 +28,1061 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background: #f4f4f4;
+      background: var(--light-gray);
       color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Loading animation */
+    .page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--accent);
+      border-top: 4px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     header {
-      background: var(--primary);
-      padding: 1rem 2rem;
-      color: white;
-      position: sticky;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 15px 30px;
+      position: fixed;
       top: 0;
-      z-index: 999;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      transition: var(--transition);
     }
 
-    header h1 {
-      font-size: 1.5rem;
+    header.scrolled {
+      padding: 10px 30px;
+      background: rgba(30, 42, 56, 0.95);
+    }
+
+    header img {
+      height: 120px;
+      transition: var(--transition);
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+
+    header.scrolled img {
+      height: 90px;
+    }
+
+    .nav-call {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
     }
 
     nav a {
       color: white;
-      margin-left: 1rem;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .call-now::before {
+      content: '☏';
+      margin-right: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 1.7em;
+      vertical-align: middle;
+    }
+
+    .call-now {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .call-now::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: var(--transition);
+      opacity: 0;
+    }
+
+    .call-now:hover::after {
+      left: 100%;
+      opacity: 1;
+    }
+
+    .call-now:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
     }
 
     .hero {
-      background: url('https://via.placeholder.com/1400x600?text=Concrete+Work') center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/background1.jpg') center/cover no-repeat;
       color: white;
-      height: 60vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 2rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(30, 42, 56, 0.1) 0%, rgba(209, 167, 102, 0.1) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+      font-weight: 700;
+      letter-spacing: -1px;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: var(--white);
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 15px 30px;
+      border: 2px solid var(--white);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover, .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary:hover {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     section {
-      padding: 4rem 2rem;
-      max-width: 1100px;
+      padding: 6rem 2rem;
+      max-width: 1200px;
       margin: auto;
+      position: relative;
     }
 
     .section-title {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-bottom: 3rem;
       color: var(--primary);
+      position: relative;
+      font-weight: 700;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      border-radius: 2px;
+    }
+
+    .about {
+      text-align: center;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--secondary);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 2rem;
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .stat:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      font-weight: 600;
     }
 
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
     }
 
     .service {
-      background: white;
+      background: var(--white);
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
       text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
 
-    .service h3 {
-      margin-bottom: 0.5rem;
+    .service::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    }
+
+    .service:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .service-icon {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin: 0 auto 1.5rem;
+      transition: var(--transition);
+    }
+
+    .service:hover .service-icon {
+      transform: scale(1.1);
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
       color: var(--primary);
+      font-weight: 700;
     }
 
-    .gallery {
+    .service p {
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    .carousel-container {
+      overflow: hidden;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .carousel-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 40s linear infinite;
+    }
+
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    .carousel-track img {
+      width: 350px;
+      height: 250px;
+      object-fit: cover;
+      margin-right: 1rem;
+      border-radius: 15px;
+      flex-shrink: 0;
+      transition: var(--transition);
+      filter: brightness(0.9);
+    }
+
+    .carousel-track img:hover {
+      filter: brightness(1.1);
+      transform: scale(1.02);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .testimonials {
+      background: var(--white);
+      padding: 6rem 2rem;
+      margin: 4rem 0;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
+    .testimonial {
+      padding: 2rem;
+      background: var(--light-gray);
+      border-radius: 15px;
+      position: relative;
     }
 
-    .cta {
-      background: var(--primary);
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .cta h2 {
-      margin-bottom: 1rem;
-    }
-
-    .cta a {
-      display: inline-block;
-      margin-top: 1rem;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      text-decoration: none;
+    .testimonial::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--accent);
+      position: absolute;
+      top: -10px;
+      left: 20px;
       font-weight: bold;
     }
 
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .cta {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    /* Enhanced CTA Button with Instant Color Change */
+    .cta .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: var(--white);
+      padding: 18px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 8px 25px rgba(209, 167, 102, 0.3);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .cta .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      z-index: -1;
+      transition: transform 0s;
+      transform: scale(0);
+      border-radius: 50px;
+    }
+
+    .cta .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .cta .btn-primary:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(44, 62, 80, 0.4);
+      color: var(--white);
+    }
+
+    .cta .btn-primary:hover::before {
+      transform: scale(1);
+    }
+
+    .cta .btn-primary:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .cta .btn-primary:active {
+      transform: translateY(-5px) scale(1.02);
+      transition: all 0.1s ease;
+    }
+
+    .contact-info {
+      margin-top: 4rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      color: white;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 200px;
+    }
+
+    .contact-item:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-5px);
+    }
+
+    .contact-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-detail {
+      opacity: 0.9;
+    }
+
     footer {
-      background: #222;
+      background: var(--dark-gray);
       color: #ccc;
       text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .mobile-menu span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 3px 0;
+      transition: var(--transition);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background: var(--primary);
+      z-index: 999;
+      transition: var(--transition);
+      padding: 6rem 2rem 2rem;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+    }
+
+    .mobile-nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 1.2rem;
     }
 
     @media (max-width: 768px) {
       header {
+        padding: 15px 20px;
+      }
+
+      .nav-call {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      section {
+        padding: 4rem 1rem;
+      }
+
+      .hero {
+        height: 80vh;
+        padding: 1rem;
+      }
+
+      .hero-cta {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
       }
-      nav {
-        margin-top: 0.5rem;
+
+      .services {
+        grid-template-columns: 1fr;
       }
+
+      .carousel-track img {
+        width: 280px;
+        height: 200px;
+      }
+
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>Weisheit Concrete Pros</h1>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <div class="hero">
-    <h2>Big or Small, We Pour It All</h2>
-    <p>Residential & Commercial Concrete Services in North Texas</p>
+  <div class="page-loader">
+    <div class="loader-spinner"></div>
   </div>
 
-  <section id="services">
-    <h2 class="section-title">Our Services</h2>
-    <div class="services">
-      <div class="service">
-        <h3>Driveways</h3>
-        <p>Durable, smooth concrete driveways built to last.</p>
+  <header id="header">
+    <div>
+      <img src="assets/logo1.png" alt="Greg Weisheit Concrete Co - Professional Concrete Services">
+    </div>
+    <div class="nav-call">
+      <nav>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="tel:8174801991" class="call-now">Call Now</a>
+    </div>
+    <div class="mobile-menu" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="toggleMobileMenu()">About Us</a>
+    <a href="#services" onclick="toggleMobileMenu()">Services</a>
+    <a href="#gallery" onclick="toggleMobileMenu()">Gallery</a>
+    <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+    <a href="tel:8174801991" onclick="toggleMobileMenu()">☏ Call Now</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Big or Small, We Pour It All</h1>
+      <p>Professional Concrete Services in North Texas - Over 60 Years of Excellence</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Get Free Estimate</a>
+        <a href="tel:8174801991" class="btn-secondary">Call (817) 480-1991</a>
       </div>
-      <div class="service">
-        <h3>Patios</h3>
-        <p>Custom patios to enhance your outdoor living space.</p>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2 class="section-title fade-in">About Greg Weisheit Concrete Co</h2>
+    <p class="about fade-in">
+      Greg Weisheit Concrete Co is a family-owned business with a legacy spanning six decades. Renowned for quality and excellence, we've been a cornerstone in the North Texas community since our inception. We specialize in a comprehensive range of concrete services, including driveways, patios, sidewalks, slabs, decorative concrete, and bobcat work. Our experienced team ensures precision and efficiency in every project, using top-quality materials and the latest techniques. With a reputation built on trust and reliability, we are dedicated to exceeding our clients' expectations and delivering exceptional results that stand the test of time.
+    </p>
+    
+    <div class="stats fade-in">
+      <div class="stat">
+        <span class="stat-number">60+</span>
+        <span class="stat-label">Years Experience</span>
       </div>
-      <div class="service">
-        <h3>Slabs</h3>
-        <p>Strong foundations for homes, garages, and sheds.</p>
+      <div class="stat">
+        <span class="stat-number">1000+</span>
+        <span class="stat-label">Projects Completed</span>
       </div>
-      <div class="service">
-        <h3>Walkways</h3>
-        <p>Safe and stylish walkways for your property.</p>
-      </div>
-      <div class="service">
-        <h3>Stamp & Dye</h3>
-        <p>Decorative concrete solutions with personality.</p>
-      </div>
-      <div class="service">
-        <h3>Bobcat Work</h3>
-        <p>Excavation, grading, and prep done with precision.</p>
+      <div class="stat">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Satisfaction Rate</span>
       </div>
     </div>
   </section>
 
+  <section id="services">
+    <h2 class="section-title fade-in">Our Professional Services</h2>
+    <div class="services">
+      <div class="service fade-in">
+        <img src="assets/icons/driveway.png" class="service-icon" alt="Professional Driveway Installation">
+        <div class="service-title">Driveways</div>
+        <p>Durable, smooth concrete driveways designed to withstand North Texas weather and heavy traffic. We create beautiful entrances that enhance your property's curb appeal.</p>
+      </div>
+      <div class="service fade-in">
+        <img src="assets/icons/patio.png" class="service-icon" alt="Custom Patio Construction">
+        <div class="service-title">Patios</div>
+        <p>Transform your backyard into an outdoor oasis with our custom patio designs. Perfect for entertaining, relaxation, and adding value to your home.</p>
+      </div>
+      <div class="service fade-in">
+        <img src="assets/icons/slab.png" class="service-icon" alt="Concrete Slab Installation">
+        <div class="service-title">Foundation Slabs</div>
+        <p>Strong, level foundations for homes, garages, sheds, and commercial buildings. Engineered to meet all local building codes and specifications.</p>
+      </div>
+      <div class="service fade-in">
+        <img src="assets/icons/walkway.png" class="service-icon" alt="Walkway Construction">
+        <div class="service-title">Walkways & Sidewalks</div>
+        <p>Safe, attractive walkways that connect your spaces beautifully. ADA-compliant options available for commercial and residential properties.</p>
+      </div>
+      <div class="service fade-in">
+        <img src="assets/icons/stamp.png" class="service-icon" alt="Decorative Concrete">
+        <div class="service-title">Decorative Concrete</div>
+        <p>Stamped, stained, and colored concrete solutions that add personality and style to any project. Endless design possibilities to match your vision.</p>
+      </div>
+      <div class="service fade-in">
+        <img src="assets/icons/bobcat.png" class="service-icon" alt="Bobcat & Excavation Services">
+        <div class="service-title">Bobcat & Excavation</div>
+        <p>Professional excavation, grading, and site preparation services. We handle all the groundwork to ensure your concrete project starts on solid footing.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="testimonials fade-in">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">Greg and his team did an outstanding job on our driveway. Professional, punctual, and the quality exceeded our expectations. Highly recommended!</p>
+        <p class="testimonial-author">- Sarah M., Burleson</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Six decades in business says it all. They know concrete better than anyone in North Texas. Our patio is absolutely beautiful.</p>
+        <p class="testimonial-author">- Mike D., Ft. Worth</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">From estimate to completion, everything was handled professionally. Fair pricing and exceptional craftsmanship. We'll definitely use them again.</p>
+        <p class="testimonial-author">- Jennifer L., Arlington</p>
+      </div>
+    </div>
+  </div>
+
   <section id="gallery">
-    <h2 class="section-title">Gallery</h2>
-    <div class="gallery">
-      <img src="https://via.placeholder.com/400x300?text=Job+1" alt="Gallery 1">
-      <img src="https://via.placeholder.com/400x300?text=Job+2" alt="Gallery 2">
-      <img src="https://via.placeholder.com/400x300?text=Job+3" alt="Gallery 3">
+    <h2 class="section-title fade-in">Our Work Gallery</h2>
+    <div class="carousel-container fade-in">
+      <div class="carousel-track">
+        <img src="assets/slab1.jpg" alt="Professional concrete slab installation">
+        <img src="assets/slab2.jpg" alt="Commercial concrete foundation">
+        <img src="assets/slab3.jpg" alt="Residential concrete slab">
+        <img src="assets/walkway1.jpg" alt="Decorative concrete walkway">
+        <img src="assets/patio2.jpg" alt="Custom patio design">
+        <img src="assets/patio3.jpg" alt="Stamped concrete patio">
+        <img src="assets/patio1.jpg" alt="Outdoor living space">
+        <img src="assets/stormdrain1.jpg" alt="Storm drain installation">
+        <img src="assets/patio4.jpg" alt="Large concrete patio project">
+        <!-- Duplicate for seamless loop -->
+        <img src="assets/slab1.jpg" alt="Professional concrete slab installation">
+        <img src="assets/slab2.jpg" alt="Commercial concrete foundation">
+        <img src="assets/slab3.jpg" alt="Residential concrete slab">
+        <img src="assets/walkway1.jpg" alt="Decorative concrete walkway">
+        <img src="assets/patio2.jpg" alt="Custom patio design">
+        <img src="assets/patio3.jpg" alt="Stamped concrete patio">
+        <img src="assets/patio1.jpg" alt="Outdoor living space">
+        <img src="assets/stormdrain1.jpg" alt="Storm drain installation">
+        <img src="assets/patio4.jpg" alt="Large concrete patio project">
+      </div>
     </div>
   </section>
 
   <section class="cta" id="contact">
-    <h2>Let’s Talk About Your Concrete Project</h2>
-    <p>We proudly serve all of North Texas. Reach out today for a quote!</p>
-    <a href="mailto:your@email.com">Contact Us</a>
+    <h2>Ready to Start Your Concrete Project?</h2>
+    <p>Contact us today for a free, no-obligation estimate. Let's discuss how we can bring your vision to life!</p>
+    <a href="mailto:gweisheitconcrete@aol.com" class="btn-primary">Get Your Free Estimate</a>
+
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">☏</div>
+        <div class="contact-title">Call Us</div>
+        <div class="contact-detail">(817) 480-1991</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="font-size: 4rem; height: 4rem;">✉</div>
+        <div class="contact-title">Email Us</div>
+        <div class="contact-detail">gweisheitconcrete@aol.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏲</div>
+        <div class="contact-title">Business Hours</div>
+        <div class="contact-detail">
+          Mon-Fri: 7am-5pm<br>
+          Sat: 7am-2pm<br>
+          Sun: Closed
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 Weisheit Concrete Pros | All rights reserved
+    <p>&copy; 2025 Greg Weisheit Concrete Co | All Rights Reserved | Licensed & Insured | Serving North Texas</p>
   </footer>
+
+  <script>
+    // Page loader
+    window.addEventListener('load', function() {
+      const loader = document.querySelector('.page-loader');
+      setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 500);
+      }, 1000);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Carousel pause on hover
+    const track = document.querySelector('.carousel-track');
+    if (track) {
+      track.addEventListener('mouseover', () => track.style.animationPlayState = 'paused');
+      track.addEventListener('mouseout', () => track.style.animationPlayState = 'running');
+    }
+
+    // Add click-to-call analytics (optional)
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+      link.addEventListener('click', function() {
+        // Track phone calls if you have analytics
+        console.log('Phone call initiated');
+      });
+    });
+
+    // Add email click analytics (optional)
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+      link.addEventListener('click', function() {
+        // Track email clicks if you have analytics
+        console.log('Email link clicked');
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      
+      if (!mobileNav.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileNav.classList.remove('active');
+      }
+    });
+
+    // Keyboard navigation for mobile menu
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('mobileNav').classList.remove('active');
+      }
+    });
+
+    // Service hover effects
+    document.querySelectorAll('.service').forEach(service => {
+      service.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      
+      service.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Add loading state for images
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('load', function() {
+        this.style.opacity = '1';
+      });
+      
+      img.addEventListener('error', function() {
+        this.style.opacity = '0.5';
+        console.log('Image failed to load:', this.src);
+      });
+    });
+
+  </script>
 
 </body>
 </html>
